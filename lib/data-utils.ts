@@ -1,15 +1,6 @@
-// This is a utility function to parse and process the log data
-// In a real application, this would process the actual log data from the API
-// For this example, we'll generate sample data based on the log format
-
 export function parseLogData() {
-    // In a real application, this would parse the actual log data
-    // For this example, we'll generate sample data that mimics the structure
-  
-    // Sample data based on the log format in the attachment
     const sampleData = []
   
-    // Common source IPs from the logs
     const sourceIps = [
       "8.42.77.171",
       "92.63.194.33",
@@ -24,15 +15,12 @@ export function parseLogData() {
       "5.188.206.22",
     ]
   
-    // Common destination ports from the logs
     const destPorts = [
       22, 80, 443, 1433, 3306, 5432, 5060, 5900, 5901, 5902, 5903, 5800, 5801, 5802, 1521, 8080, 8443, 3389, 23, 21,
     ]
   
-    // Common protocols from the logs
     const protocols = ["TCP", "UDP"]
   
-    // Common categories from the logs
     const categories = [
       "Potentially Bad Traffic",
       "Attempted Information Leak",
@@ -44,26 +32,23 @@ export function parseLogData() {
       "ET SCAN Potential VNC Scan 5900-5920",
     ]
   
-    // Generate sample data
     const startDate = new Date("2019-01-02T03:50:00Z")
     const endDate = new Date("2019-01-02T06:50:00Z")
   
-    // Generate 200 sample alerts
     for (let i = 0; i < 200; i++) {
       const timestamp = new Date(startDate.getTime() + Math.random() * (endDate.getTime() - startDate.getTime()))
   
       sampleData.push({
         timestamp: timestamp.toISOString(),
         src_ip: sourceIps[Math.floor(Math.random() * sourceIps.length)],
-        dest_ip: "138.68.3.71", // Common destination IP from the logs
+        dest_ip: "138.68.3.71",
         dest_port: destPorts[Math.floor(Math.random() * destPorts.length)],
         proto: protocols[Math.floor(Math.random() * protocols.length)],
         category: categories[Math.floor(Math.random() * categories.length)],
-        severity: Math.floor(Math.random() * 4) + 1, // 1-4, where 1 is most severe
+        severity: Math.floor(Math.random() * 4) + 1,
       })
     }
   
-    // Sort by timestamp
     return sampleData.sort((a, b) => new Date(b.timestamp).getTime() - new Date(a.timestamp).getTime())
   }
   

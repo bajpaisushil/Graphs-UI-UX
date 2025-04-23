@@ -18,19 +18,9 @@ export default function Dashboard() {
   const [isLoading, setIsLoading] = useState(true)
 
   useEffect(() => {
-    // In a real application, we would fetch this data from an API
-    // For this example, we'll simulate loading the data
     const fetchData = async () => {
       try {
-        // Simulating data fetch delay
         await new Promise((resolve) => setTimeout(resolve, 1000))
-
-        // In a real app, you would fetch data from an API endpoint
-        // const response = await fetch('/api/security-logs');
-        // const data = await response.json();
-
-        // For this example, we'll use our parseLogData utility
-        // which would normally process the raw log data
         const parsedData = parseLogData()
         setLogData(parsedData)
       } catch (error) {
@@ -43,7 +33,6 @@ export default function Dashboard() {
     fetchData()
   }, [])
 
-  // Calculate summary statistics
   const totalAlerts = logData.length
   const criticalAlerts = logData.filter((alert) => alert.severity === 1).length
   const uniqueAttackers = new Set(logData.map((alert) => alert.src_ip)).size

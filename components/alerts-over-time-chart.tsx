@@ -26,7 +26,6 @@ export default function AlertsOverTimeChart({ data }: AlertsOverTimeChartProps) 
   useEffect(() => {
     if (!chartRef.current || !data.length) return
 
-    // Group alerts by hour
     const hourCounts: Record<string, number> = {}
 
     data.forEach((alert) => {
@@ -50,12 +49,10 @@ export default function AlertsOverTimeChart({ data }: AlertsOverTimeChartProps) 
     const labels = sortedHours
     const counts = sortedHours.map((hour) => hourCounts[hour])
 
-    // Destroy previous chart if it exists
     if (chartInstance.current) {
       chartInstance.current.destroy()
     }
 
-    // Create new chart
     const ctx = chartRef.current.getContext("2d")
 
     if (ctx) {

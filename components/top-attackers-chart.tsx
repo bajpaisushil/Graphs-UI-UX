@@ -26,7 +26,6 @@ export default function TopAttackersChart({ data }: TopAttackersChartProps) {
   useEffect(() => {
     if (!chartRef.current || !data.length) return
 
-    // Count alerts by source IP
     const ipCounts: Record<string, number> = {}
 
     data.forEach((alert) => {
@@ -37,7 +36,6 @@ export default function TopAttackersChart({ data }: TopAttackersChartProps) {
       ipCounts[alert.src_ip]++
     })
 
-    // Sort by count and take top 10
     const topAttackers = Object.entries(ipCounts)
       .sort((a, b) => b[1] - a[1])
       .slice(0, 10)
@@ -45,7 +43,6 @@ export default function TopAttackersChart({ data }: TopAttackersChartProps) {
     const labels = topAttackers.map(([ip]) => ip)
     const counts = topAttackers.map(([, count]) => count)
 
-    // Generate colors
     const colors = [
       "#3b82f6",
       "#ef4444",
@@ -59,12 +56,10 @@ export default function TopAttackersChart({ data }: TopAttackersChartProps) {
       "#84cc16",
     ]
 
-    // Destroy previous chart if it exists
     if (chartInstance.current) {
       chartInstance.current.destroy()
     }
 
-    // Create new chart
     const ctx = chartRef.current.getContext("2d")
 
     if (ctx) {

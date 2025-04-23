@@ -26,7 +26,6 @@ export default function AlertCategoryChart({ data }: AlertCategoryChartProps) {
   useEffect(() => {
     if (!chartRef.current || !data.length) return
 
-    // Count alerts by category
     const categoryCounts: Record<string, number> = {}
 
     data.forEach((alert) => {
@@ -37,13 +36,11 @@ export default function AlertCategoryChart({ data }: AlertCategoryChartProps) {
       categoryCounts[alert.category]++
     })
 
-    // Sort by count
     const sortedCategories = Object.entries(categoryCounts).sort((a, b) => b[1] - a[1])
 
     const labels = sortedCategories.map(([category]) => category)
     const counts = sortedCategories.map(([, count]) => count)
 
-    // Generate colors
     const colors = [
       "#3b82f6",
       "#ef4444",
@@ -62,7 +59,6 @@ export default function AlertCategoryChart({ data }: AlertCategoryChartProps) {
       chartInstance.current.destroy()
     }
 
-    // Create new chart
     const ctx = chartRef.current.getContext("2d")
 
     if (ctx) {

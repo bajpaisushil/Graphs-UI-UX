@@ -28,7 +28,6 @@ export default function AlertTable({ data }: AlertTableProps) {
   const [sortDirection, setSortDirection] = useState<"asc" | "desc">("desc")
   const itemsPerPage = 10
 
-  // Filter data based on search term
   const filteredData = data.filter(
     (alert) =>
       alert.src_ip.includes(searchTerm) ||
@@ -38,7 +37,6 @@ export default function AlertTable({ data }: AlertTableProps) {
       alert.dest_port.toString().includes(searchTerm),
   )
 
-  // Sort data
   const sortedData = [...filteredData].sort((a, b) => {
     if (sortField === "timestamp") {
       const dateA = new Date(a[sortField]).getTime()
@@ -55,12 +53,10 @@ export default function AlertTable({ data }: AlertTableProps) {
     return sortDirection === "asc" ? valueA.localeCompare(valueB) : valueB.localeCompare(valueA)
   })
 
-  // Paginate data
   const totalPages = Math.ceil(sortedData.length / itemsPerPage)
   const startIndex = (currentPage - 1) * itemsPerPage
   const paginatedData = sortedData.slice(startIndex, startIndex + itemsPerPage)
 
-  // Handle sort
   const handleSort = (field: keyof AlertData) => {
     if (field === sortField) {
       setSortDirection(sortDirection === "asc" ? "desc" : "asc")
@@ -70,7 +66,6 @@ export default function AlertTable({ data }: AlertTableProps) {
     }
   }
 
-  // Get severity badge
   const getSeverityBadge = (severity: number) => {
     const colors = {
       1: "bg-red-500",

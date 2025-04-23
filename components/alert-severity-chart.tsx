@@ -26,8 +26,7 @@ export default function AlertSeverityChart({ data }: AlertSeverityChartProps) {
   useEffect(() => {
     if (!chartRef.current || !data.length) return
 
-    // Count alerts by severity
-    const severityCounts = [0, 0, 0, 0] // Severity levels 1-4
+    const severityCounts = [0, 0, 0, 0]
 
     data.forEach((alert) => {
       const severityIndex = Math.min(Math.max(alert.severity - 1, 0), 3)
@@ -37,12 +36,10 @@ export default function AlertSeverityChart({ data }: AlertSeverityChartProps) {
     const labels = ["Critical", "High", "Medium", "Low"]
     const colors = ["#ef4444", "#f97316", "#f59e0b", "#3b82f6"]
 
-    // Destroy previous chart if it exists
     if (chartInstance.current) {
       chartInstance.current.destroy()
     }
 
-    // Create new chart
     const ctx = chartRef.current.getContext("2d")
 
     if (ctx) {

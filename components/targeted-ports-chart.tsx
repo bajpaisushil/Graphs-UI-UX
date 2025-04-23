@@ -26,7 +26,6 @@ export default function TargetedPortsChart({ data }: TargetedPortsChartProps) {
   useEffect(() => {
     if (!chartRef.current || !data.length) return
 
-    // Count alerts by destination port
     const portCounts: Record<number, number> = {}
 
     data.forEach((alert) => {
@@ -37,14 +36,12 @@ export default function TargetedPortsChart({ data }: TargetedPortsChartProps) {
       portCounts[alert.dest_port]++
     })
 
-    // Sort by count and take top 10
     const topPorts = Object.entries(portCounts)
       .sort((a, b) => Number(b[1]) - Number(a[1]))
       .slice(0, 10)
 
     const labels = topPorts.map(([port]) => {
       const portNum = Number(port)
-      // Add common service names for well-known ports
       const serviceNames: Record<number, string> = {
         22: "SSH (22)",
         80: "HTTP (80)",
@@ -71,7 +68,6 @@ export default function TargetedPortsChart({ data }: TargetedPortsChartProps) {
 
     const counts = topPorts.map(([, count]) => count)
 
-    // Generate colors
     const colors = [
       "#3b82f6",
       "#ef4444",
