@@ -14,7 +14,7 @@ import { parseLogData } from "@/lib/data-utils"
 import ClientTime from "@/components/client-time"
 
 export default function Dashboard() {
-  const [logData, setLogData] = useState([])
+  const [logData, setLogData] = useState<any[]>([])
   const [isLoading, setIsLoading] = useState(true)
 
   useEffect(() => {
